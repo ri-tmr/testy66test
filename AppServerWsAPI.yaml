@@ -1,0 +1,3145 @@
+openapi: "3.0.1"
+info:
+  title: "TinyMobileRobots App Server WS API"
+  version: "4.0.0"
+  description: |
+    This document aims to describe the websocket communication between the following entities:
+
+    <img alt="[Tablet] --- [App Server] --- [Robot]" src=" data:image/png;base64,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"/>
+    
+    The endpoints defined in this document refer to requests sent to the App Server through a WS connection.
+    Every request consists of one JSON object sent to the App Server, either from a Tablet or Robot. This is represented by the request body.
+    Most requests have one JSON object reply, sent back through the WS connection. This is represented by the response body.
+    Some requests have a sequence of multiple replies. This is represented by a sequence of responses with incremented response codes (e.g. [200, 201, 202, ...]) where the order follows the order in which they are sent.
+
+    The description of the response always contains where it is sent to (e.g. in some cases, a request coming in from a tablet will be relayed to a robot, meaning that the response\'s destination is different from the request's source). The following values are allowed:
+
+    - __send__ (default option, replies back to the origin of the request)
+    - __connection_tablet__ (replies to the specified tablet)
+    - __connection_robot__ (replies to the specified robot)
+    - __broadcast_for_robot__ (broadcasts the reply to all tablets that are paired with the specified robot)
+    - __broadcast_for_customer__ (broadcasts the reply to all robots and tablets that are associated with the specified customer)
+    - __broadcast_for_dealer__ (broadcasts the reply to all robots and tablets that are associated with the specified dealer or dealer's children)
+
+    Both requests and replies follow the same structure:
+    ```json
+    {
+      topic: "path like definition (string)",
+      data: {payload},
+      UUID: "unique identifier of the request, where the uuid of the response matches the said identifier (string)",
+      time: "unix timestamp of the request (integer)",
+    }
+    ```
+    
+    In this document, the path of each __endpoint__ matches the topic, as it is the equivalent definition.
+    The HTTP method is not applicable to this document. Arbitrarily defined POST is used to mark __endpoints that contain a straight forward request/reply scenario, where the reply(s) are sent back to the same origin as the request. And PUT is used in all other cases.
+
+    ### Lifecycle of a WebSocket connection in JavaScript
+
+    1. Create the WebSocket channel
+    2. Log in (within 60s)
+    3. Send your data
+    4. (Optional) Close the WebSocket
+
+    Remember to send a __keep_alive__ every 2s to keep the connection alive. Otherwise the server will terminate it.
+
+    #### Example of the lifecycle
+    ```javascript
+    wsHandle = new WebSocket('ws://localhost:8084/app?user=abc');
+    
+    wsHandle.send(JSON.stringify({
+      'topic': 'user_login',
+      'data': {
+        'username': 'user',
+        'password': 'user',
+      },
+      'UUID': guid(),
+      'time': time.now,
+    }));
+    
+    wsHandle.send(JSON.stringify({
+      'topic': 'keep_alive',
+      'UUID': guid(),
+      'time': time.now,
+    }));
+    
+    wsHandle.send(JSON.stringify({
+      'topic': 'get_db_jobs',
+      'data': {
+        'robot': 208,
+      },
+      'UUID': guid(),
+      'time': time.now,
+    }));
+    
+    wsHandle.close();
+    ```
+  
+components:
+
+  schemas:
+    topic:
+      description: "path like definition"
+      type: string
+      example: "save_key_val"
+
+    data:
+      description: "payload of the request JSON object"
+      type: object
+
+    UUID:
+      description: "unique identifier of the request"
+      type: string
+      example: "..."
+
+    time:
+      description: "unix timestamp of the request"
+      type: integer
+      example: 0
+
+    message:
+      type: object
+      required:
+        - "topic"
+        - "data"
+        - "UUID"
+        - "time"
+      properties:
+        topic:
+          $ref: '#/components/schemas/topic'
+        data:
+          $ref: '#/components/schemas/data'
+        UUID:
+          $ref: '#/components/schemas/UUID'
+        time:
+          $ref: '#/components/schemas/time'
+
+    messageRequest:
+      allOf:
+        - $ref: '#/components/schemas/message'
+      properties:
+        UUID:
+          example: "in..."
+
+    messageResponse:
+      allOf:
+        - $ref: '#/components/schemas/message'
+      properties:
+        UUID:
+          example: "out..."
+
+    okMessage:
+      allOf:
+        - $ref: '#/components/schemas/messageResponse'
+      properties:
+        topic:
+          example: "ok"
+        data:
+          properties:
+            UUID:
+              allOf:
+                - $ref: '#/components/schemas/UUID'
+              description: "unique identifier of the original request"
+              example: "in..."
+            topic:
+              allOf:
+                - $ref: '#/components/schemas/topic'
+              description: "topic of the original request"
+
+    requestStatusMessageSuccess:
+      allOf:
+        - $ref: '#/components/schemas/messageResponse'
+      properties:
+        data:
+          properties:
+            success:
+              type: boolean
+              example: true
+
+    requestStatusMessageError:
+      allOf:
+        - $ref: '#/components/schemas/requestStatusMessageSuccess'
+      properties:
+        data:
+          properties:
+            success:
+              example: false
+
+    robots:
+      allOf:
+        - $ref: '#/components/schemas/messageResponse'
+      properties:
+        topic:
+          example: "robots"
+        data:
+          properties:
+            robots:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  bmac:
+                    type: string
+                  version:
+                    type: string
+                  bt_info:
+                    type: string
+                  online:
+                    type: string
+                  base_mode:
+                    type: string
+
+    user:
+      allOf:
+        - $ref: '#/components/schemas/requestStatusMessageSuccess'
+      properties:
+        topic:
+          example: "login_user"
+        data:
+          properties:
+            username:
+              type: string
+            auth:
+              type: boolean
+            user_id:
+              type: integer
+            customer:
+              type: integer
+            templates:
+              type: string
+            user_level:
+              type: integer
+            connect_to:
+              type: string
+            user_templates:
+              type: string
+            customer_name:
+              type: string
+            features:
+              type: string
+            items:
+              type: string
+
+    jobs:
+      allOf:
+        - $ref: '#/components/schemas/messageResponse'
+      properties:
+        topic:
+          example: "db_jobs"
+        data:
+          properties:
+            jobs:
+              type: array
+              items: 
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  build_extra:
+                    type: object
+                  template:
+                    type: string
+                  date:
+                    type: integer
+            customer_id:
+              type: integer
+            sync:
+              type: boolean
+            removed_jobs:
+              type: array
+              items:
+                type: string
+            error:
+              type: string
+
+    featuregroups:
+      allOf:
+        - $ref: '#/components/schemas/messageResponse'
+      properties:
+        topic:
+          example: "user_featuregroups"
+        data:
+          properties:
+            user:
+              type: integer
+            featuregroups:
+              type: object
+              properties:
+                id:
+                  type: number
+                name:
+                  type: string
+                description:
+                  type: string
+                owned:
+                  type: boolean
+                templategroup:
+                  type: boolean
+                features:
+                  type: string
+                price:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      price:
+                        type: integer
+                      currency:
+                        type: string
+                order_header:
+                  type: string
+                order_body:
+                  type: string
+                metadata:
+                  type: object
+
+    dns_settings:
+      allOf:
+        - $ref: '#/components/schemas/messageResponse'
+      properties:
+        topic:
+          example: "set_dns_settings"
+        data:
+          properties:
+            dns_settings:
+              type: object
+              properties:
+                address:
+                  type: string
+                port:
+                  type: string
+                use_secure:
+                  type: boolean
+                prepend_hostname:
+                  type: boolean
+                append_hostname:
+                  type: boolean
+                get_parameters:
+                  type: object
+
+    connected_users:
+      allOf:
+        - $ref: '#/components/schemas/messageResponse'
+      properties:
+        topic:
+          example: "connected_users"
+        data:
+          properties:
+            connected_users:
+              type: integer
+            users:
+              type: array
+              items:
+                type: string
+    
+
+tags:
+- name: "Common Messages"
+- name: "Tablet Messages"
+- name: Robot Messages
+- name: Stateless
+- name: Stateful
+- name: Needs renaming
+- name: Dangerous!
+- name: No Permission Checks
+- name: Deprecated
+
+paths:
+
+  /save_key_val:
+    post:
+      tags:
+      - Common Messages
+      - Stateless
+      description: "Saves a key-value pair for the authenticated device (tablet or robot)"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "save_key_val"
+                data:
+                  properties:
+                    key:
+                      type: string
+                    val:
+                      type: string
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "save_key_val"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/requestStatusMessageSuccess'
+                properties:
+                  topic:
+                    example: "save_key_val"
+
+  /get_projections:
+    post:
+      tags:
+      - Common Messages
+      - Stateless
+      description: "Returns the most recent projection list from the database"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "get_projections"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "get_projections"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "projections"
+                  data:
+                    type: string
+                    example: "alias1:proj1\nalias2:proj2\n..."
+
+  /close_server:
+    post:
+      tags:
+      - Common Messages
+      - Dangerous
+      - Stateless
+      - Deprecated
+      description: "Destroys the server instance after all WS connections has been closed"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "close_server"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "close_server"
+
+  /close_server_when_no_robots:
+    post:
+      tags:
+      - Common Messages
+      - Stateless
+      - Dangerous
+      - Deprecated
+      description: "destroys the server instance after all robot WS connections has been closed"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "close_server_when_no_robots"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "close_server_when_no_robots"
+
+  /close_server_when_no_tablets:
+    post:
+      tags:
+      - Common Messages
+      - Dangerous
+      - Stateless
+      - Deprecated
+      description: "destroys the server instance after all tablet WS connections has been closed"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "close_server_when_no_tablets"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "close_server_when_no_tablets"
+
+  /close_when_no_robot_in_auto:
+    post:
+      tags:
+      - Common Messages
+      - Dangerous
+      - Stateless
+      - Deprecated
+      description: "destroys the server instance after there aren't any robots connected in auto mode"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "close_when_no_robot_in_auto"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "close_when_no_robot_in_auto"
+
+  /uptime:
+    post:
+      tags:
+      - Common Messages
+      - Stateless
+      - Deprecated
+      description: "returns the uptime of the server instance"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "uptime"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "uptime"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "time"
+                  data:
+                    properties:
+                      time:
+                        type: integer
+
+  /login_user:
+    post:
+      tags:
+      - Tablet Messages
+      - Stateful
+      description: "authenticates a tablet"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "login_user"
+                data:
+                  properties:
+                    username:
+                      type: string
+                    password:
+                      type: string
+                    send_customer_jobs:
+                      type: string
+                    appVersion:
+                      type: string
+                    lastJobTime:
+                      type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "login_user"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/robots'
+        201:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/user'
+        202:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/jobs'
+        203:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/featuregroups'
+        204:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "dealer_is_customer"
+                  data:
+                    properties:
+                      result:
+                        type: boolean
+                      dealer:
+                        type: string
+        205:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/dns_settings'
+        401:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/requestStatusMessageError'
+                properties:
+                  topic:
+                    example: "login_user"
+                  data:
+                    properties:
+                      error_msg:
+                        type: string
+                        example: "Wrong username or password"
+
+  /connect_to_robot: 
+    put:
+      tags:
+      - Tablet Messages
+      - Stateful
+      description: "connects to robot with robotId"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "connect_to_robot"
+                data:
+                  properties:
+                    robot:
+                      type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "connect_to_robot"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/requestStatusMessageSuccess"
+        201:
+          description: "__connection_robot__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/connected_users'
+
+  /disableWriterDB:
+    post:
+      tags:
+        - Tablet Messages
+        - Dangerous
+        - Stateless
+        - Deprecated
+      description: "disables the database writer (void)"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "disableWriterDB"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "disableWriterDB"
+
+  /disableReaderDB:
+    post:
+      tags:
+        - Tablet Messages
+        - Dangerous
+        - Stateless
+        - Deprecated
+      description: "disables the database reader (void)"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "disableReaderDB"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "disableReaderDB"
+
+  /enableWriterDB:
+    post:
+      tags:
+        - Tablet Messages
+        - Dangerous
+        - Stateless
+        - Deprecated
+      description: "enables the database writer (void)"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "enableWriterDB"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "enableWriterDB"
+
+  /enableReaderDB:
+    post:
+      tags:
+        - Tablet Messages
+        - Dangerous
+        - Stateless
+        - Deprecated
+      description: "enables the database reader (void)"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "enableReaderDB"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "enableReaderDB"
+
+  /set_robot_name:
+    put:
+      tags:
+        - Tablet Messages
+        - Stateless
+        - No Permission Checks
+      description: "Renames the robot"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "set_robot_name"
+                data:
+                  properties:
+                    robot:
+                      type: integer
+                    new_name:
+                      type: string
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "set_robot_name"
+        200:
+          description: "__broadcast_for_customer__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/robots'
+        201:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/requestStatusMessageSuccess'
+                properties:
+                  topic:
+                    example: "set_robot_name_done"
+
+  /get_customers:
+    post:
+      tags:
+      - Tablet Messages
+      - Stateful
+      description: "returns customers"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "get_customers"
+                data:
+                  properties:
+                    force_customer:
+                      type: integer
+                      description: "if set, returned result is for the specified customer instead of the logged in customer"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "get_customers"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "user_customers"
+                  data:
+                    properties:
+                      customers:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                            dealer:
+                              type: integer
+                      dealer:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          name:
+                            type: string
+                      me:
+                        type: integer
+                        description: "id of the logged in user"
+
+  /set_dealer:
+    post:
+      tags:
+        - Tablet Messages
+        - Stateless
+        - Deprecated
+      description: "sets the customer's dealer"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "set_dealer"
+                data:
+                  properties:
+                    new_dealer:
+                      type: integer  
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "set_dealer"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "done_set_dealer"
+                  data:
+                    properties:
+                      success:
+                        type: boolean
+
+  /get_tablets:
+    post:
+      tags:
+      - Tablet Messages
+      - Deprecated
+      - Stateless
+      description: "returns a set of tablets based on the ids"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "get_tablets"
+                data:
+                  type: object
+                  properties:
+                    ids:
+                      type: array
+                      items:
+                        type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "get_tablets"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "got_tablets"
+                  data:
+                    type: object
+                    properties:
+                      tablets:
+                        type: array
+                        items:
+                          properties:
+                            customer:
+                              type: integer
+                            tablet_id:
+                              type: integer
+                            tablet_name:
+                              type: string
+                            app_version:
+                              type: string
+                            robot_id:
+                              type: integer
+                            robot_name:
+                              type: string
+                            robot_version:
+                              type: string
+                            robot_customer:
+                              type: integer
+
+  /get_robots:
+    post:
+      tags:
+      - Tablet Messages
+      - Deprecated
+      - Stateless
+      description: "returns a set of robots based on the ids"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "get_robots"
+                data:
+                  properties:
+                    ids:
+                      type: array
+                      items:
+                        type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "get_robots"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "got_robots"
+                  data:
+                    type: object
+                    properties:
+                      robots:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            tablet_customer:
+                              type: integer
+                            tablet_id:
+                              type: integer
+                            tablet_name:
+                              type: string
+                            app_version:
+                              type: string
+                            robot_id:
+                              type: integer
+                            robot_name:
+                              type: string
+                            robot_version:
+                              type: string
+                            robot_customer:
+                              type: integer   
+
+  /get_dealer_templates:
+    post:
+      tags:
+      - Tablet Messages
+      - Stateless
+      - Deprecated
+      description: "returns the templates owned by the dealer of the customer"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "get_dealer_templates"
+                data:
+                  type: object
+                  properties:
+                    customer:
+                      type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "get_dealer_templates"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "dealer_templates"
+                  data:
+                    properties:
+                      customer:
+                        type: integer
+                      templates:
+                        type: object
+                        properties:
+                          add:
+                            type: string
+                            example: "template1,template2,..."
+                          hide:
+                            type: string
+                            example: "template1,template2,..."
+
+  /set_dealer_templates:
+    put:
+      tags:
+        - Tablet Messages
+        - Stateless
+        - Deprecated
+      description: "sets the dealers templates"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "set_dealer_templates"
+                data:
+                  properties:
+                    customer:
+                      type: integer
+                    templates:
+                      type: string  
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "set_dealer_templates"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/requestStatusMessageSuccess'
+                properties:
+                  topic:
+                    example: "dealer_templates_saved"
+        201:
+          description: "__broadcast_for_customer__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/user'
+
+  /set_user_level:
+    put:
+      tags:
+        - Tablet Messages
+        - Stateless
+      description: "sets the user level"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "set_user_level"
+                data:
+                  properties:
+                    user_id:
+                      type: integer
+                    new_user_level:
+                      type: integer  
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "set_user_level"
+        200:
+          description: "__connection_tablet__"   
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/user'
+
+  /disable_developer_mode:
+    post:
+      tags:
+        - Tablet Messages
+        - Stateless
+        - Deprecated
+      description: "disables developer mode (void)"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "disable_developer_mode"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "disable_developer_mode"
+
+  /robots:
+    post:
+      tags:
+        - Tablet Messages
+        - Stateful
+      description: "Returns all robots that the user has access to"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "robots"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "robots"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/robots'
+
+  /get_templates:
+    post:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "returns the templates that the specified user has access to (falls back to the authenticated user if not specified)"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "get_templates"
+                data:
+                  properties:
+                    user:
+                      type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "get_templates"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "user_templates"
+                  data:
+                    properties:
+                      user:
+                        type: integer
+                      templates:
+                        type: string
+
+  /get_user_templates:
+    post:
+      tags:
+      - Tablet Messages
+      - Stateless
+      - Deprecated
+      description: "returns the templates that the specified user has access to (falls back to the authenticated user if not specified)"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "get_user_templates"
+                data:
+                  properties:
+                    user:
+                      type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "get_user_templates"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "user_templates"
+                  data:
+                    properties:
+                      user:
+                        type: integer
+                      templates:
+                        type: string
+
+  /set_user_templates:
+    put:
+      tags:
+        - Tablet Messages
+        - Stateless
+        - No Permission Checks
+      description: "sets the specified user's templates (falls back to the authenticated user if not specified)"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "set_user_templates"
+                data:
+                  properties:
+                    user_id:
+                      type: integer
+                    templates:
+                      type: string
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "set_user_templates"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/requestStatusMessageSuccess'
+                properties:
+                  topic:
+                    example: "user_templates_saved"
+        201:
+          description: "__connection_tablet__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/user'
+
+  /get_user_featuregroups:
+    post:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "returns the featuregroups that the specified user has access to (falls back to the authenticated user if not specified)"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "get_user_featuregroups"
+                data:
+                  properties:
+                    user_id:
+                      type: integer  
+                    include_vat:
+                      type: boolean
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "get_user_featuregroups"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/featuregroups'
+
+  /getNextAppVersion:
+    post:
+      tags:
+      - Tablet Messages
+      - Deprecated
+      description: "returns the next app version (which it can be updated to)"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "getNextAppVersion"
+                data:
+                  properties:
+                    tag:
+                      type: string
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "getNextAppVersion"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "appVersionInfo"
+                  data:
+                    properties:
+                      next:
+                        type: object
+                        properties:
+                          tag:
+                            type: string
+                          deprecated:
+                            type: boolean
+                      rc:
+                        type: object
+                        properties:
+                          tag:
+                            type: string
+                          deprecated:
+                            type: boolean
+                      current:
+                        type: object
+                        properties:
+                          deprecated:
+                            type: boolean
+                          exists:
+                            type: boolean
+
+  /enable_send_of_customer_jobs:
+    post:
+      tags:
+        - Tablet Messages
+        - Stateless
+      description: "enables/disables the sending of customer jobs"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "enable_send_of_customer_jobs"
+                data:
+                  properties:
+                    enable:
+                      type: boolean
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "enable_send_of_customer_jobs"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "enable_send_of_customer_jobs"
+                  data:
+                    properties:
+                      enable:
+                        type: boolean
+
+  /create_db_job:
+    put:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "creates a job for the specified customer (falls back to the authenticated user's customer if not specified)"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "create_db_job"
+                data:
+                  properties:
+                    use_customer:
+                      type: integer
+                    name:
+                      type: string
+                    template:
+                      type: string
+                    build_extra:
+                      type: object
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "create_db_job"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "create_db_job"
+                  data:
+                    properties:
+                      id:
+                        type: integer
+                      success:
+                        type: boolean       
+        201:
+          description: "__broadcast_for_dealer__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/jobs'
+
+  /get_db_jobs:
+    put:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "returns jobs based on the specified customer (falls back to the authenticated user's customer if not specified)"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "get_db_jobs"
+                data:
+                  type: object
+                  properties:
+                    customer:
+                      type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "get_db_jobs"
+        200:
+          description: "__broadcast_for_dealer__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/jobs'
+
+  /get_job_revision:
+    post:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "returns the job revisions for the specified job id"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "get_job_revision"
+                data:
+                  properties:
+                   id:
+                     type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "get_job_revision"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "db_job_revisions"
+                  data:
+                    type: object
+                    properties:
+                      jobs:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            original_id:
+                              type: integer
+                            name:
+                              type: string
+                            build_extra:
+                              type: string
+                            template:
+                              type: string
+                            date_from:
+                              type: integer
+                            date_to:
+                              type: integer
+  /get_deleted_jobs:
+    post:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "returns deleted jobs"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "get_deleted_jobs"
+                data:
+                  type: object
+                  properties:
+                   daysOld:
+                     type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "get_deleted_jobs"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "deleted_jobs"
+                  data:
+                    type: object
+                    properties:
+                      deleted_jobs:
+                        type: object
+                        properties:
+                          jobs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                original_id:
+                                  type: integer
+                                name: 
+                                  type: string
+                                build_extra:
+                                  type: string
+                                template: 
+                                  type: string
+                                date_from:
+                                  type: integer
+                                date_to:
+                                  type: integer
+
+  /save_db_job:
+    put:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "updates a job"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "save_db_job"
+                data:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    template:
+                      type: string
+                    build_extra:
+                      type: object
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "save_db_job"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "save_db_job"
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      success:
+                        type: boolean       
+        201:
+          description: "__broadcast_for_dealer__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/jobs'
+
+  /delete_db_job:
+    put:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "deletes a job with the specified id"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "delete_db_job"
+                data:
+                  properties:
+                    job_id:
+                      type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "delete_db_job"
+        200:
+          description: "__broadcast_for_dealer__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/jobs'
+
+  /delete_db_jobs:
+    put:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "deletes a set of jobs with the specified ids"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "delete_db_jobs"
+                data:
+                  properties:
+                    job_ids:
+                      type: array
+                      items:
+                        type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "delete_db_jobs"
+        200:
+          description: "__broadcast_for_dealer__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/jobs'
+
+  /move_db_jobs:
+    put:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "moves jobs to another customer"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "move_db_jobs"
+                data:
+                  properties:
+                    ids:
+                      type: array
+                      items:
+                        type: integer
+                    old_customer:
+                      type: integer
+                    new_customer:
+                      type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "move_db_jobs"
+        200:
+          description: "__broadcast_for_dealer__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/jobs'
+
+  /copy_db_jobs:
+    put:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "copies jobs to another customer"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "copy_db_jobs"
+                data:
+                  properties:
+                    job_ids:
+                      type: array
+                      items:
+                        type: integer
+                    old_customer:
+                      type: integer
+                    new_customer:
+                      type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "copy_db_jobs"
+        200:
+          description: "__broadcast_for_dealer__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/jobs'
+
+  /restore_jobs:
+    put:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "restores deleted jobs with the specified ids"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "restore_jobs"
+                data:
+                  properties:
+                    ids:
+                      type: array
+                      items:
+                        type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "restore_jobs"
+        200:
+          description: "__broadcast_for_dealer__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/jobs'
+
+  /webshop.buyFeature:
+    post:
+      tags:
+        - Tablet Messages
+        - Stateful
+      description: "buys the feature group"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "webshop.buyFeature"
+                data:
+                  properties:
+                    group_id:
+                      type: integer
+                    creator_id:
+                      type: integer
+                    vat:
+                      type: string
+                    group_name:
+                      type: string
+                    currency:
+                      type: string
+                    success_url:
+                      type: string
+                    cancel_url:
+                      type: string
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "webshop.buyFeature"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "webshop.buyFeature"
+                  data:
+                    properties:
+                      success:
+                        type: boolean
+                      group_id: 
+                        type: integer
+                      result: 
+                        type: string
+                      free_group:
+                        type: boolean
+                      is_order:
+                        type: boolean
+        201:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/featuregroups'
+
+  /webshop.redeemVoucher:
+    post:
+      tags:
+        - Tablet Messages
+        - Stateful
+      description: "redeems a voucher"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "webshop.redeemVoucher"
+                data:
+                  properties:
+                    code:
+                      type: string
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "webshop.redeemVoucher"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "webshop.redeemVoucher"
+                  data:
+                    properties:
+                      success:
+                        type: boolean
+                      result:
+                        type: string
+        201:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/featuregroups'
+
+  /get_robot_db_data:
+    post:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "returns an array of value timeseries for the given robot+key combination"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "get_robot_db_data"
+                data:
+                  properties:
+                    robot:
+                     type: integer
+                    key:
+                     type: string
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "get_robot_db_data"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "get_robot_db_data"
+                  data:
+                    properties:
+                      success:
+                        type: boolean
+                      robot:
+                        type: integer
+                      values:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            val:
+                              type: object
+                            time:
+                              type: integer
+
+  /clean_robot_data:
+    post:
+      tags:
+      - Tablet Messages
+      - Deprecated
+      - Dangerous!
+      - Stateless
+      - No Permition Checks
+      description: "truncates all key-value pairs for a robot"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "clean_robot_data"
+                data:
+                  properties:
+                    robot:
+                      type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "clean_robot_data"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/requestStatusMessageSuccess'
+                properties:
+                  topic:
+                    example: "clean_robot_data"
+                    
+  /save_device_data:
+    post:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "saves a device data key-value pair for the specified device"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "save_device_data"
+                data:
+                  properties:
+                    key:
+                      type: string
+                    val:
+                      type: string
+                    device_type:
+                      type: integer
+                    device_id:
+                      type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "save_device_data"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/requestStatusMessageSuccess'
+                properties:
+                  topic:
+                    example: "save_device_data"
+                  
+
+  /get_device_data:
+    post:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "returns an array of key-value pairs for the specified device"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "get_device_data"
+                data:
+                  properties:
+                    device_type:
+                      type: integer
+                    device_id:
+                      type: integer
+                    keys:
+                      type: array
+                      items:
+                        type: string        
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "get_device_data"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "get_device_data"
+                  data:
+                    properties:
+                      device_type:
+                        type: integer
+                      device_id:
+                        type: integer
+                      device_data:
+                        type: array
+                        items: 
+                          type: object
+                          properties:
+                            data_key:
+                              type: string
+                            data_val:
+                              type: string       
+
+  /get_base_stations:
+    post:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "returnes all basestation for the specified customer"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "get_base_stations"
+                data:
+                  properties:
+                    customerId:
+                      type: integer
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "get_base_stations"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "get_base_stations"
+                  data:
+                    properties:
+                      base_stations:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            customerId:
+                              type: integer
+                            mac:
+                              type: string
+                            online:
+                              type: boolean
+                            dataIsFlowing:
+                              type: boolean
+                            position: 
+                              type: string    
+
+  /fetch_all_template_tags:
+    post:
+      tags:
+      - Tablet Messages
+      - Stateless
+      description: "returnes all template tags"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "fetch_all_template_tags"   
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "fetch_all_template_tags"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "fetch_all_template_tags"
+                  data:
+                    properties:
+                      tags:
+                        type: array
+                        items: 
+                          type: string
+
+  /login_robot:
+    put:
+      tags:
+      - Robot Messages
+      - Stateful
+      description: "authenticates a robot"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "login_robot"
+                data:
+                  properties:
+                    username:
+                      type: string
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "login_robot"
+        200:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "login_robot"
+                  data:
+                    properties:
+                      success:
+                        type: boolean
+                      name:
+                        type: string
+                      rs:
+                        type: string
+                      mac:
+                        type: string
+        201:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/dns_settings'
+        202:
+          description: "__broadcast_for_robot__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/robots'
+        203:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/connected_users'
+
+  /ping:
+    put:
+      tags:
+      - Robot Messages
+      - Stateless
+      description: "relays the payload to the defined tablet (pings the tablet)"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "ping"
+                data:
+                  properties:
+                    user:
+                      type: integer
+                      description: "tablet id"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "ping"
+        200:
+          description: "__connection_tablet__ tablet id can be found in request.body.data.user"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "ping"
+
+  /robot_mac:
+    put:
+      tags:
+      - Robot Messages
+      - Stateless
+      description: "broadcasts the robot details to all paired tablets"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "robot_mac"
+                data:
+                  properties:
+                    mac:
+                      type: string
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "robot_mac"
+        200:
+          description: "__broadcast_for_robot__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/robots'
+
+  /user_info:
+    put:
+      tags:
+      - Robot Messages
+      - Stateless
+      description: "relays the payload to all paired tablets"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "user_info"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "user_info"
+        200:
+          description: "__broadcast_for_robot__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "user_info"
+
+  /robot_version:
+    put:
+      tags:
+      - Robot Messages
+      - Stateless
+      description: "updates the robot version (void)"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "robot_version"
+                data:
+                  properties:
+                    version:
+                      type: string
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "robot_version"
+
+  /system_diag:
+    put:
+      tags:
+      - Robot Messages
+      - Stateless
+      description: "broadcasts the robot details and relays the payload to all paired tablets"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "system_diag"
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "system_diag"
+        200:
+          description: "__broadcast_for_robot__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/robots'
+        201:
+          description: "__broadcast_for_robot__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    type: string
+                    example: "system_diag"
+                  
+
+  /ntrip_settings:
+    put:
+      tags:
+      - Robot Messages
+      - Stateless
+      description: "updates the ntrip settings of the robot and relays the payload to the paired tablets"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/messageRequest'
+              properties:
+                topic:
+                  example: "ntrip_settings"
+                data:
+                  properties:
+                    server:
+                      type: string
+                    port:
+                      type: string
+                    username:
+                      type: string
+                    password:
+                      type: string
+                    mountpoint:
+                      type: string
+
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "ntrip_settings"
+        200:
+          description: "__broadcast_for_robot__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/messageResponse'
+                properties:
+                  topic:
+                    example: "ntrip_settings"
+                  data:
+                    properties:
+                      server:
+                        type: string
+                      port:
+                        type: string
+                      username:
+                        type: string
+                      password:
+                        type: string
+                      mountpoint:
+                        type: string
+
+  /connection_is_robot/topic_not_recognized:
+    put:
+      tags:
+      - Robot Messages
+      - Stateless
+      description: "relays the payload to the paired tablets"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/messageRequest'
+      responses:
+        100:
+          description: "__send__"
+          content:
+            'application/json':
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/okMessage'
+                properties:
+                  data:
+                    properties:
+                      topic:
+                        example: "<the given topic>"
+        200:
+          description: "__broadcast_for_robot__"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/messageResponse'
